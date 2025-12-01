@@ -7,62 +7,173 @@
     <title>Friends Club United - Official Website</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; background:#f8f9fa; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background:#f8f9fa;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scrolling */
+        }
         
-        header { background: #1a5276; color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: bold; }
-        .search-bar { flex: 1; max-width: 350px; margin: 0 2rem; }
+        header { 
+            background: #1a5276; 
+            color: white; 
+            padding: 1rem 0; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+        }
+        .nav-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo { 
+            font-size: 1.4rem;
+            font-weight: bold; 
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+            text-align: center;
+        }
+        .search-bar { flex: 1; max-width: 300px; margin: 0 1rem; }
         .search-bar input { width: 100%; padding: 0.6rem; border: none; border-radius: 30px; font-size: 1rem; }
-        .hamburger-btn { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
+        .hamburger-btn { background: none; border: none; color: white; font-size: 1.6rem; cursor: pointer; padding: 0.3rem; }
         .dropdown-menu { display: none; position: absolute; right: 1rem; top: 70px; background: white; min-width: 220px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden; z-index: 1001; }
         .dropdown-menu.show { display: block; }
         .dropdown-menu a { display: block; padding: 1rem 1.5rem; color: #2c3e50; text-decoration: none; transition: background 0.3s; }
         .dropdown-menu a:hover { background: #e3f2fd; color: #1a5276; }
         
-        main { margin-top: 90px; max-width: 1300px; margin-left: auto; margin-right: auto; padding: 2rem 1rem; }
-        .logo-section { text-align: center; margin: 3rem 0 4rem; }
-        .club-logo { font-size: 4.5rem; font-weight: 900; color: #1a5276; line-height: 1.1; }
+        /* MAIN CONTENT WITH SCROLLING */
+        main { 
+            margin-top: 90px; 
+            max-width: 1300px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            padding: 2rem 1rem;
+            height: calc(100vh - 120px); /* Full height minus header */
+            overflow-y: auto; /* Enable scrolling */
+        }
+        
+        .logo-section { text-align: center; margin: 2rem 0 3rem; }
+        .club-logo { 
+            font-size: 3.5rem;
+            font-weight: 900; 
+            color: #1a5276; 
+            line-height: 1.1;
+            word-wrap: break-word;
+            padding: 0 1rem;
+        }
         .slogan { font-size: 1.4rem; color: #e74c3c; font-style: italic; margin-top: 1rem; }
         
-        .main-tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-        .tab-card { background: white; padding: 2.5rem 1.5rem; border-radius: 12px; text-align: center; box-shadow: 0 6px 15px rgba(0,0,0,0.1); cursor: pointer; transition: all 0.3s ease; }
+        .main-tabs { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.5rem; 
+            margin-bottom: 3rem; 
+        }
+        .tab-card { 
+            background: white; 
+            padding: 2rem 1.5rem; 
+            border-radius: 12px; 
+            text-align: center; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1); 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         .tab-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
         .tab-card.active { background: #1a5276; color: white; }
-        .tab-card h3 { color: #1a5276; margin-bottom: 0.8rem; font-size: 1.5rem; }
+        .tab-card h3 { 
+            color: #1a5276; 
+            margin-bottom: 0.8rem; 
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
         .tab-card.active h3 { color: white; }
+        .tab-card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+        .tab-card.active p { color: rgba(255,255,255,0.9); }
         
-        .content-section { display: none; background: white; padding: 3rem; border-radius: 12px; margin: 2rem 0; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-        .content-section.active { display: block; animation: fadeIn 0.6s ease; }
+        /* CONTENT SECTIONS WITH FULL CONTENT */
+        .content-section { 
+            display: none; 
+            background: white; 
+            padding: 3rem; 
+            border-radius: 12px; 
+            margin: 2rem 0; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            min-height: 500px; /* Ensure enough space for scrolling */
+        }
+        .content-section.active { 
+            display: block; 
+            animation: fadeIn 0.6s ease; 
+        }
         @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
         
-        /* Updated Gallery */
-        .gallery-grid {
+        /* MEMBERS LIST STYLES */
+        .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .member-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #1a5276;
+            font-size: 1rem;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
         }
         .gallery-item {
-            border-radius: 15px;
+            background: white;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
         }
-        .gallery-item:hover { transform: translateY(-10px); }
-        .gallery-item img {
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-img-placeholder {
             width: 100%;
-            height: 400px;
-            object-fit: cover;
-            display: block;
+            height: 200px;
+            background: linear-gradient(135deg, #1a5276, #3498db);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
         }
         .gallery-caption {
-            padding: 1.3rem;
+            padding: 1rem;
             background: #1a5276;
             color: white;
             text-align: center;
             font-weight: 600;
-            font-size: 1.2rem;
         }
         
         .developer-footer {
@@ -76,14 +187,18 @@
         }
 
         @media (max-width: 768px) {
-            .gallery-item img { height: 300px; }
+            .nav-container { flex-direction: column; gap: 1rem; }
+            .search-bar { max-width: 100%; margin: 0 1rem; }
+            .club-logo { font-size: 2.5rem; }
+            .logo { font-size: 1.2rem; max-width: 150px; }
             .content-section { padding: 2rem; }
+            .members-grid { grid-template-columns: 1fr; }
+            main { height: calc(100vh - 140px); } /* Adjust for mobile */
         }
     </style>
 </head>
 <body>
 
-<!-- Header & Navigation (unchanged) -->
 <header>
     <div class="nav-container">
         <div class="logo">FRIENDS CLUB UNITED</div>
@@ -96,7 +211,7 @@
                 <a href="#" data-tab="about">About Us</a>
                 <a href="#" data-tab="vision">Our Vision</a>
                 <a href="#" data-tab="mission">Our Mission</a>
-                <a href="#" data-tab="players">Players</a>
+                <a href="#" data-tab="members">Unified Members</a>
                 <a href="#" data-tab="executives">Executives</a>
                 <a href="#" data-tab="events">Events</a>
                 <a href="#" data-tab="gallery">Friends Gallery</a>
@@ -115,48 +230,334 @@
     </section>
 
     <div class="main-tabs">
-        <div class="tab-card active" data-tab="about"><h3>About Us</h3><p>Our journey & legacy</p></div>
-        <div class="tab-card" data-tab="vision"><h3>Vision</h3><p>Future goals</p></div>
-        <div class="tab-card" data-tab="mission"><h3>Mission</h3><p>Core values</p></div>
-        <div class="tab-card" data-tab="players"><h3>Players</h3><p>Meet the squad</p></div>
-        <div class="tab-card" data-tab="executives"><h3>Executives</h3><p>Leadership</p></div>
-        <div class="tab-card" data-tab="events"><h3>Events</h3><p>Matches & activities</p></div>
-        <div class="tab-card" data-tab="gallery"><h3>Friends Gallery</h3><p>Memories in photos</p></div>
+        <div class="tab-card active" data-tab="about">
+            <h3>About Us</h3>
+            <p>Discover our journey from street football to united brotherhood</p>
+        </div>
+        <div class="tab-card" data-tab="vision">
+            <h3>Our Vision</h3>
+            <p>See our future goals and community aspirations</p>
+        </div>
+        <div class="tab-card" data-tab="mission">
+            <h3>Our Mission</h3>
+            <p>Learn about our core values and commitments</p>
+        </div>
+        <div class="tab-card" data-tab="members">
+            <h3>Unified Members</h3>
+            <p>Meet all 39 members of our brotherhood</p>
+        </div>
+        <div class="tab-card" data-tab="executives">
+            <h3>Executives</h3>
+            <p>Our dedicated leadership team</p>
+        </div>
+        <div class="tab-card" data-tab="events">
+            <h3>Events</h3>
+            <p>Upcoming matches and activities schedule</p>
+        </div>
+        <div class="tab-card" data-tab="gallery">
+            <h3>Friends Gallery</h3>
+            <p>Photo memories of our journey together</p>
+        </div>
     </div>
 
-    <!-- Other sections (unchanged - shortened for brevity) -->
-    <section id="about" class="content-section active"><h2>About Friends Club United</h2><p>Friends Club United was forged not in a boardroom...</p></section>
-    <section id="vision" class="content-section"><h2>Our Vision</h2><p>To be the foremost community-based football club...</p></section>
-    <section id="mission" class="content-section"><h2>Our Mission</h2><p>To build a premier football organization...</p></section>
-    <section id="players" class="content-section"><h2>United Players</h2><p>Meet the brotherhood...</p></section>
-    <section id="executives" class="content-section"><h2>United Executives</h2><p>Our dedicated leadership...</p></section>
-    <section id="events" class="content-section"><h2>Upcoming Events & Matches</h2><p>Stay tuned...</p></section>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="content-section active">
+        <h2>About Friends Club United</h2>
+        <p>Friends Club United was forged not in a boardroom, but on the dusty pitches of street football. Our origins are a testament to the power of camaraderie, beginning as a group of friends united by a shared love for the beautiful game.</p>
+        
+        <p>What started as casual street football matches among companions quickly evolved into something much greater. We realized that the bond we shared on the pitch extended far beyond the boundaries of the game. We decided to organize our passion into something permanent, something that would capture the spirit of our friendship while embracing the discipline of organized football.</p>
+        
+        <p>Today, we proudly boast a membership running into hundreds, but numbers alone don't define us. What truly makes Friends Club United special is that we are more than just a football club - we are a social brotherhood bound by unwavering commitment to one another.</p>
+        
+        <h3>Our Training Ground</h3>
+        <p>You can find us training at our spiritual home: Community Secondary School Obeama, Oyigbo Rivers State. This is where dreams are nurtured and friendships are strengthened with every session.</p>
+        
+        <h3>More Than Just Football</h3>
+        <p>When any fully registered member suffers misfortune, we don't just stand by and watch. We run to their intervention, offering support in whatever way we can. When our members have cause to celebrate, we join in their joy through collective contributions and shared happiness.</p>
+    </section>
 
-    <!-- UPDATED GALLERY - ONLY YOUR TWO NEW PHOTOS -->
+    <!-- VISION SECTION -->
+    <section id="vision" class="content-section">
+        <h2>Our Vision</h2>
+        <p>To be the foremost community-based football club, recognized not only for our excellence on the pitch but for our unwavering commitment to fostering a brotherhood that uplifts, empowers, and transforms the lives of our members and the wider community.</p>
+        
+        <h3>Supporting Pillars of Our Vision:</h3>
+        <div class="members-grid">
+            <div class="member-item">
+                <strong>Sporting Excellence:</strong> Cultivate a competitive environment that nurtures local talent, promotes discipline, and achieves sustained success, inspiring the next generation of athletes in Rivers State and beyond.
+            </div>
+            <div class="member-item">
+                <strong>Unbreakable Brotherhood:</strong> Perpetuate a self-sustaining ecosystem of mutual support where every member is a valued part of a family, ensuring that no one stands alone in times of need or celebration.
+            </div>
+            <div class="member-item">
+                <strong>Community Anchor:</strong> Become a positive force for development, youth engagement, and social cohesion within Oyigbo and the wider Rivers State community through outreach programs and initiatives.
+            </div>
+            <div class="member-item">
+                <strong>Legacy of Values:</strong> Build an enduring institution where the core values of Integrity, Solidarity, Passion, and Respect are passed down, ensuring the club's founding spirit thrives for generations to come.
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION SECTION -->
+    <section id="mission" class="content-section">
+        <h2>Our Mission</h2>
+        <p>To build a premier football organization rooted in excellence, brotherhood, and community impact. We achieve this through four key pillars:</p>
+        
+        <div class="members-grid">
+            <div class="member-item">
+                <strong>Developing Talent & Character:</strong> Providing professional training focusing on technical skills, tactical understanding, physical fitness, and strong sportsmanship. We believe in building not just better players, but better individuals.
+            </div>
+            <div class="member-item">
+                <strong>Strengthening Our Brotherhood:</strong> Actively fostering a culture of mutual care and responsibility through robust support systems, ensuring every member has a network that provides financial, emotional, and social backing in times of both challenge and triumph.
+            </div>
+            <div class="member-item">
+                <strong>Serving Our Community:</strong> Leveraging the power of football to inspire youth, promote healthy living, and drive positive social change within Oyigbo and Rivers State through outreach programs and community initiatives.
+            </div>
+            <div class="member-item">
+                <strong>Upholding Our Values:</strong> Operating with unwavering integrity, passion, and respect—on and off the pitch—to honor our legacy and solidify our reputation as a club that stands for more than just football.
+            </div>
+        </div>
+        
+        <p style="margin-top: 2rem; font-style: italic; text-align: center;">
+            <strong>In essence, our mission is to win matches, build men, and serve our community, all through the unifying spirit of the beautiful game.</strong>
+        </p>
+    </section>
+
+    <!-- UNIFIED MEMBERS SECTION -->
+    <section id="members" class="content-section">
+        <h2>Unified Members</h2>
+        <p>Meet the brotherhood that makes Friends Club United strong - 39 dedicated members and growing:</p>
+        
+        <div class="members-grid">
+            <div class="member-item">Mr. Solomon</div>
+            <div class="member-item">Mr. Kcee Limpopo</div>
+            <div class="member-item">Mst. OBC International (RG)</div>
+            <div class="member-item">Mr. Edu Montana</div>
+            <div class="member-item">Mst. Iruoma Ozoachianu</div>
+            <div class="member-item">Mr. Chinedu Aka onye wetalu</div>
+            <div class="member-item">Mst. Obiefuna Peter</div>
+            <div class="member-item">Mr. Ikechukwu</div>
+            <div class="member-item">Mr. Emeka Egwu</div>
+            <div class="member-item">Mst. Stanley Ifeanyi (Concord)</div>
+            <div class="member-item">Arinze (Arewa)</div>
+            <div class="member-item">Mr. Anthony (RG)</div>
+            <div class="member-item">Mst. Chiemerie Ilo</div>
+            <div class="member-item">Mr. Destiny</div>
+            <div class="member-item">Mst. God's will Felix</div>
+            <div class="member-item">Aza Man</div>
+            <div class="member-item">Mbappe</div>
+            <div class="member-item">Emeka (Oyigbo)</div>
+            <div class="member-item">Arab Money</div>
+            <div class="member-item">V Lord</div>
+            <div class="member-item">Ebuka Okolo (Best Man)</div>
+            <div class="member-item">David Nwaogu</div>
+            <div class="member-item">Chukwudi Robinson</div>
+            <div class="member-item">SomeTochukwu (Santos)</div>
+            <div class="member-item">Dominic Joshua</div>
+            <div class="member-item">Chinonoso Sir-white</div>
+            <div class="member-item">Ozoemena</div>
+            <div class="member-item">Anozie</div>
+            <div class="member-item">Innocent Uche (Hustle Empire)</div>
+            <div class="member-item">John Bosco (CJ)</div>
+            <div class="member-item">Chukwunonso Onyenbom</div>
+            <div class="member-item">Chinonso Christian (I am a Christian)</div>
+            <div class="member-item">Mr. Elule Chinaka Casimir (Master)</div>
+            <div class="member-item">Mr. Michael Atuba</div>
+            <div class="member-item">Nduibuisi Igwe Mexico</div>
+            <div class="member-item">Nwaolu J. Uchechukwu</div>
+            <div class="member-item">Ben Brown</div>
+            <div class="member-item">Chidi Shadrach</div>
+            <div class="member-item">Mr. Jerome Udochukwu</div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 2rem; font-weight: bold; color: #1a5276; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+            Total: 39 Unified Members • Friends Club United Brotherhood
+        </p>
+    </section>
+
+    <!-- EXECUTIVES SECTION -->
+    <section id="executives" class="content-section">
+        <h2>United Executives</h2>
+        <p>Our dedicated leadership team working tirelessly to move the club forward and maintain our brotherhood:</p>
+        
+        <div class="members-grid">
+            <div class="member-item">
+                <strong>Club President</strong><br>
+                Responsible for overall club leadership and strategic direction
+            </div>
+            <div class="member-item">
+                <strong>Vice President</strong><br>
+                Supports the president and oversees daily operations
+            </div>
+            <div class="member-item">
+                <strong>General Secretary</strong><br>
+                Handles club documentation, meetings, and communications
+            </div>
+            <div class="member-item">
+                <strong>Financial Secretary</strong><br>
+                Manages club finances, dues, and financial reporting
+            </div>
+            <div class="member-item">
+                <strong>Team Manager</strong><br>
+                Coordinates matches, training schedules, and team logistics
+            </div>
+            <div class="member-item">
+                <strong>Social Secretary</strong><br>
+                Organizes club events, celebrations, and social activities
+            </div>
+        </div>
+        
+        <p style="margin-top: 2rem; text-align: center; font-style: italic;">
+            Our executives are elected democratically by members and serve to uphold the values and vision of Friends Club United.
+        </p>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section id="events" class="content-section">
+        <h2>Upcoming Events & Matches</h2>
+        <p>Stay connected with our club activities, matches, and social events:</p>
+        
+        <div class="members-grid">
+            <div class="member-item" style="background: #e8f4f8;">
+                <strong>Next Match</strong><br>
+                <em>Date:</em> To be announced<br>
+                <em>Opponent:</em> Local Community Team<br>
+                <em>Venue:</em> Community Secondary School Obeama
+            </div>
+            <div class="member-item" style="background: #f0f8f0;">
+                <strong>Training Schedule</strong><br>
+                <em>Days:</em> Evenings & Weekends<br>
+                <em>Location:</em> Community Secondary School Obeama<br>
+                <em>Focus:</em> Skills development and team bonding
+            </div>
+            <div class="member-item" style="background: #fff8e8;">
+                <strong>Monthly Meeting</strong><br>
+                <em>When:</em> First Saturday of each month<br>
+                <em>Agenda:</em> Club updates, financial review, and planning<br>
+                <em>All members are encouraged to attend</em>
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; background: #1a5276; color: white; border-radius: 8px;">
+            <h3 style="color: white; margin-bottom: 1rem;">Stay Updated</h3>
+            <p>For the latest updates on matches, training sessions, and club events, members are advised to check with club executives regularly. Schedules may change based on weather conditions and other factors.</p>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
     <section id="gallery" class="content-section">
         <h2 style="text-align:center; color:#1a5276; margin-bottom:1rem;">Friends Gallery</h2>
         <p style="text-align:center; font-size:1.3rem; color:#e74c3c; margin-bottom:3rem;">
             Brotherhood ⚽ Passion ⚽ Victory — This is Friends Club United
         </p>
 
-        <div class="gallery-grid">
-            <!-- New Full Squad Photo -->
+        <div class="gallery-container">
             <div class="gallery-item">
-                <img src="https://i.ibb.co/4p7YJ7k/full-squad-new.jpg" alt="Friends Club United Full Squad">
-                <div class="gallery-caption">The Full Squad – United We Stand, Divided We Fall</div>
+                <div class="gallery-img-placeholder">TEAM LINEUP<br>PHOTO</div>
+                <div class="gallery-caption">Squad receiving instructions before a session</div>
             </div>
 
-            <!-- New Pyramid Celebration Photo -->
             <div class="gallery-item">
-                <img src="https://i.ibb.co/6P1YvN4/pyramid-new.jpg" alt="Pyramid Celebration">
-                <div class="gallery-caption">The Pyramid – Strength in Brotherhood</div>
+                <div class="gallery-img-placeholder">TEAM PHOTO</div>
+                <div class="gallery-caption">The United Brotherhood - All 39 Members</div>
             </div>
+
+            <div class="gallery-item">
+                <div class="gallery-img-placeholder">WARM-UP SESSION</div>
+                <div class="gallery-caption">Warm-up drills on the pitch</div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-img-placeholder">MATCH ACTION</div>
+                <div class="gallery-caption">Game moments and celebrations</div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-img-placeholder">TEAM BONDING</div>
+                <div class="gallery-caption">Social events and brotherhood activities</div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="gallery-img-placeholder">TRAINING</div>
+                <div class="gallery-caption">Skills development sessions</div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 2rem; font-style: italic; color: #666;">
+            More photos coming soon as we continue to document our journey together!
+        </p>
+    </section>
+
+    <!-- OTHER SECTIONS (abbreviated for space) -->
+    <section id="establishment" class="content-section">
+        <h2>Our Establishment</h2>
+        <p>Friends Club United simply started when some friends who played street football decided to organize what they did into a football club - hence the name. Our training ground is at Community Secondary School Obeama, Oyigbo Rivers State.</p>
+        
+        <p>We are also more or less a social brotherhood club who always run to the intervention of any fully registered member who suffers a misfortune. We run contributions for members who are celebrating too. It is the spirit of love and affection and enthusiasm shown amongst us that makes us stand up strong among other football clubs.</p>
+        
+        <h3>Our Humble Beginnings</h3>
+        <p>What began as casual matches among friends has grown into a respected community institution. The same passion that fueled our street football games now drives our commitment to excellence, both on and off the pitch.</p>
+    </section>
+
+    <section id="join" class="content-section">
+        <h2>How to Join Friends Club United</h2>
+        <p>We are thrilled that you are interested in becoming part of our brotherhood. Becoming a member of Friends Club United is a straightforward process designed to welcome committed individuals into our fold.</p>
+        
+        <h3>Membership Registration Process:</h3>
+        <div class="members-grid">
+            <div class="member-item">
+                <strong>Step 1: Complete Registration Form</strong><br>
+                Visit us during our training sessions at Community Secondary School Obeama, Oyigbo Rivers State to fill out and submit your official club registration form.
+            </div>
+            <div class="member-item">
+                <strong>Step 2: Pay Registration Fee</strong><br>
+                A one-time, non-refundable registration fee of ₦5,000 is required to process your membership application and officially enroll you in the club.
+            </div>
+        </div>
+        
+        <h3>Financial Commitments:</h3>
+        <ul style="margin: 1rem 0; padding-left: 2rem;">
+            <li><strong>Registration Fee (₦5,000):</strong> Covers the cost of the registration form and administrative processing for your membership.</li>
+            <li><strong>Additional Kit & Contributions:</strong> Upon successful registration, all new members will be informed of separate costs for jerseys and monthly dues.</li>
+        </ul>
+        
+        <div style="background: #e8f4f8; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+            <p><strong>Training Location:</strong> Community Secondary School Obeama, Oyigbo Rivers State</p>
+            <p><strong>Contact:</strong> Approach any of our executives at the training ground for more information</p>
         </div>
     </section>
 
-    <section id="establishment" class="content-section"><h2>Our Establishment</h2><p>Friends Club United started when friends...</p></section>
-    <section id="join" class="content-section"><h2>How to Join</h2><p>Join our brotherhood...</p></section>
-    <section id="contact" class="content-section"><h2>Contact Us</h2><p>Get in touch...</p></section>
+    <section id="contact" class="content-section">
+        <h2>Contact Friends Club United</h2>
+        <p>Get in touch with us for more information, partnership opportunities, or to join our brotherhood.</p>
+        
+        <div class="members-grid">
+            <div class="member-item">
+                <strong>📍 Training Ground</strong><br>
+                Community Secondary School Obeama<br>
+                Oyigbo Rivers State
+            </div>
+            <div class="member-item">
+                <strong>📞 Phone Contact</strong><br>
+                +234 814 387 8975<br>
+                Available for club inquiries
+            </div>
+            <div class="member-item">
+                <strong>⚽ Training Times</strong><br>
+                Evenings and weekends<br>
+                Confirm with executives for schedule
+            </div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; background: #1a5276; color: white; border-radius: 8px;">
+            <h3 style="color: white;">Visit Us</h3>
+            <p>We're always happy to welcome new members to our football family! Come see us during our training sessions to experience the Friends Club United brotherhood firsthand.</p>
+        </div>
+        
+        <p style="text-align: center; margin-top: 2rem; font-style: italic;">
+            "We're always happy to welcome new members to our football family!"
+        </p>
+    </section>
 
     <div class="developer-footer">
         <p>Website Developed by 1stcatenaTechnologies | +2348143878975</p>
@@ -165,17 +566,32 @@
 </main>
 
 <script>
+    // Tab functionality
     document.querySelectorAll('[data-tab]').forEach(card => {
         card.addEventListener('click', function() {
             const tab = this.getAttribute('data-tab');
-            document.querySelectorAll('.tab-card').forEach(t => t.classList.remove('active'));
+            
+            // Update active tab
+            document.querySelectorAll('.tab-card').forEach(tab => {
+                tab.classList.remove('active');
+            });
             this.classList.add('active');
-            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+            
+            // Show selected section
+            document.querySelectorAll('.content-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
             document.getElementById(tab).classList.add('active');
+            
+            // Close dropdown menu
             document.querySelector('.dropdown-menu').classList.remove('show');
+            
+            // Scroll to top of content
+            document.querySelector('main').scrollTop = 0;
         });
     });
 
+    // Hamburger menu
     document.querySelector('.hamburger-btn').addEventListener('click', e => {
         e.stopPropagation();
         document.querySelector('.dropdown-menu').classList.toggle('show');
@@ -184,6 +600,55 @@
         if (!e.target.closest('.hamburger-menu')) {
             document.querySelector('.dropdown-menu').classList.remove('show');
         }
+    });
+
+    // WORKING SEARCH FUNCTIONALITY
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        
+        if (searchTerm.length < 2) {
+            document.querySelectorAll('.content-section, .gallery-item, .member-item').forEach(element => {
+                element.style.display = '';
+            });
+            return;
+        }
+
+        let foundResults = false;
+
+        // Search through content sections
+        document.querySelectorAll('.content-section').forEach(section => {
+            const sectionText = section.textContent.toLowerCase();
+            const sectionTitle = section.querySelector('h2') ? section.querySelector('h2').textContent.toLowerCase() : '';
+            
+            if (sectionText.includes(searchTerm) || sectionTitle.includes(searchTerm)) {
+                section.style.display = 'block';
+                foundResults = true;
+            } else {
+                section.style.display = 'none';
+            }
+        });
+
+        // Search through gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            const caption = item.querySelector('.gallery-caption').textContent.toLowerCase();
+            if (caption.includes(searchTerm)) {
+                item.style.display = '';
+                foundResults = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // Search through member items
+        document.querySelectorAll('.member-item').forEach(item => {
+            const memberName = item.textContent.toLowerCase();
+            if (memberName.includes(searchTerm)) {
+                item.style.display = '';
+                foundResults = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
     });
 </script>
 </body>
