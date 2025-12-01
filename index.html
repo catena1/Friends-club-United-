@@ -1,4 +1,15 @@
 
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +24,7 @@
             color: #333; 
             background:#f8f9fa;
             height: 100vh;
-            overflow: hidden; /* Prevent body scrolling */
+            overflow: hidden;
         }
         
         header { 
@@ -51,15 +62,14 @@
         .dropdown-menu a { display: block; padding: 1rem 1.5rem; color: #2c3e50; text-decoration: none; transition: background 0.3s; }
         .dropdown-menu a:hover { background: #e3f2fd; color: #1a5276; }
         
-        /* MAIN CONTENT WITH SCROLLING */
         main { 
             margin-top: 90px; 
             max-width: 1300px; 
             margin-left: auto; 
             margin-right: auto; 
             padding: 2rem 1rem;
-            height: calc(100vh - 120px); /* Full height minus header */
-            overflow-y: auto; /* Enable scrolling */
+            height: calc(100vh - 120px);
+            overflow-y: auto;
         }
         
         .logo-section { text-align: center; margin: 2rem 0 3rem; }
@@ -109,7 +119,6 @@
         }
         .tab-card.active p { color: rgba(255,255,255,0.9); }
         
-        /* CONTENT SECTIONS WITH FULL CONTENT */
         .content-section { 
             display: none; 
             background: white; 
@@ -117,7 +126,7 @@
             border-radius: 12px; 
             margin: 2rem 0; 
             box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            min-height: 500px; /* Ensure enough space for scrolling */
+            min-height: 500px;
         }
         .content-section.active { 
             display: block; 
@@ -125,7 +134,6 @@
         }
         @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
         
-        /* MEMBERS LIST STYLES */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -193,7 +201,7 @@
             .logo { font-size: 1.2rem; max-width: 150px; }
             .content-section { padding: 2rem; }
             .members-grid { grid-template-columns: 1fr; }
-            main { height: calc(100vh - 140px); } /* Adjust for mobile */
+            main { height: calc(100vh - 140px); }
         }
     </style>
 </head>
@@ -382,12 +390,16 @@
         
         <div class="members-grid">
             <div class="member-item">
-                <strong>Club President</strong><br>
+                <strong>Chairman</strong><br>
                 Responsible for overall club leadership and strategic direction
             </div>
             <div class="member-item">
-                <strong>Vice President</strong><br>
-                Supports the president and oversees daily operations
+                <strong>Vice Chairman</strong><br>
+                Supports the chairman and oversees daily operations
+            </div>
+            <div class="member-item">
+                <strong>Coach</strong><br>
+                Manages team training, tactics, and player development
             </div>
             <div class="member-item">
                 <strong>General Secretary</strong><br>
@@ -426,13 +438,13 @@
             </div>
             <div class="member-item" style="background: #f0f8f0;">
                 <strong>Training Schedule</strong><br>
-                <em>Days:</em> Evenings & Weekends<br>
+                <em>Days:</em> Sunday 7:00 AM<br>
                 <em>Location:</em> Community Secondary School Obeama<br>
                 <em>Focus:</em> Skills development and team bonding
             </div>
             <div class="member-item" style="background: #fff8e8;">
                 <strong>Monthly Meeting</strong><br>
-                <em>When:</em> First Saturday of each month<br>
+                <em>When:</em> Last Sunday of each month<br>
                 <em>Agenda:</em> Club updates, financial review, and planning<br>
                 <em>All members are encouraged to attend</em>
             </div>
@@ -488,7 +500,7 @@
         </p>
     </section>
 
-    <!-- OTHER SECTIONS (abbreviated for space) -->
+    <!-- OTHER SECTIONS -->
     <section id="establishment" class="content-section">
         <h2>Our Establishment</h2>
         <p>Friends Club United simply started when some friends who played street football decided to organize what they did into a football club - hence the name. Our training ground is at Community Secondary School Obeama, Oyigbo Rivers State.</p>
@@ -544,7 +556,7 @@
             </div>
             <div class="member-item">
                 <strong>⚽ Training Times</strong><br>
-                Evenings and weekends<br>
+                Sunday 7:00 AM<br>
                 Confirm with executives for schedule
             </div>
         </div>
